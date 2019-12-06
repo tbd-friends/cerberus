@@ -1,4 +1,5 @@
-﻿using api.Input.Models;
+﻿using System.Threading.Tasks;
+using api.Input.Models;
 using command.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +18,11 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public void NewCustomer(CustomerInputModel model)
+        public async Task NewCustomer(CustomerInputModel model)
         {
             if (ModelState.IsValid)
             {
-                _mediator.Send(new CreateNewCustomer
+                await _mediator.Send(new CreateNewCustomer
                 { Honorific = model.Honorific, FirstName = model.FirstName, LastName = model.LastName });
             }
         }

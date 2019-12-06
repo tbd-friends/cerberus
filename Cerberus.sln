@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "command", "src\command\command.csproj", "{F4FD83E7-F58E-41FD-B90C-F804CDBA272C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "command.persistence", "src\command.persistence\command.persistence.csproj", "{1D710A97-23B2-43C7-9D25-B27F5D447FD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{F4FD83E7-F58E-41FD-B90C-F804CDBA272C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4FD83E7-F58E-41FD-B90C-F804CDBA272C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4FD83E7-F58E-41FD-B90C-F804CDBA272C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D710A97-23B2-43C7-9D25-B27F5D447FD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D710A97-23B2-43C7-9D25-B27F5D447FD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D710A97-23B2-43C7-9D25-B27F5D447FD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D710A97-23B2-43C7-9D25-B27F5D447FD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F4FD83E7-F58E-41FD-B90C-F804CDBA272C} = {5E3F5BED-06E0-4BCB-AF8C-503B1B151057}
+		{1D710A97-23B2-43C7-9D25-B27F5D447FD7} = {5E3F5BED-06E0-4BCB-AF8C-503B1B151057}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE895848-907C-494C-B556-BDAA9F153459}
