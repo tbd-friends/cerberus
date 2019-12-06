@@ -51,5 +51,11 @@ namespace api.Controllers
                 });
             }
         }
+
+        [HttpGet, Route("{id:guid}/orders")]
+        public async Task<CustomerWithOrders> GetCustomerWithOrders(Guid id)
+        {
+            return await _mediator.Send(new GetCustomerWithOrders {Id = id});
+        }
     }
 }

@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using query.Handlers;
 using query.persistence;
-using query.Projections;
 
 namespace api
 {
@@ -36,7 +35,7 @@ namespace api
 
             services.AddMediatR(
                 typeof(CreateNewCustomerHandler).Assembly,
-                typeof(CustomerDetailProjection).Assembly);
+                typeof(GetAllCustomersHandler).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

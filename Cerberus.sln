@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{AAD2DF5A-9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cerberus.core.kafka", "src\core\cerberus.core.kafka\cerberus.core.kafka.csproj", "{055D2C62-B494-46A5-A668-CC7268FAC279}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "order.consumer", "src\consumers\order.consumer\order.consumer.csproj", "{FFBF5E1A-B9DA-404A-BE9D-7D041E0CC6B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{055D2C62-B494-46A5-A668-CC7268FAC279}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{055D2C62-B494-46A5-A668-CC7268FAC279}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{055D2C62-B494-46A5-A668-CC7268FAC279}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFBF5E1A-B9DA-404A-BE9D-7D041E0CC6B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFBF5E1A-B9DA-404A-BE9D-7D041E0CC6B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFBF5E1A-B9DA-404A-BE9D-7D041E0CC6B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFBF5E1A-B9DA-404A-BE9D-7D041E0CC6B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{D5E76D46-939B-4098-B98E-9619762244DF} = {5E3F5BED-06E0-4BCB-AF8C-503B1B151057}
 		{361EBE89-4A08-4C49-9917-E3048E74362D} = {D5E76D46-939B-4098-B98E-9619762244DF}
 		{055D2C62-B494-46A5-A668-CC7268FAC279} = {AAD2DF5A-992E-4344-92F8-89603F8F60BD}
+		{FFBF5E1A-B9DA-404A-BE9D-7D041E0CC6B4} = {D5E76D46-939B-4098-B98E-9619762244DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE895848-907C-494C-B556-BDAA9F153459}
