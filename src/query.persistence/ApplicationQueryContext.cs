@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using MongoDB.Driver;
 
 namespace query.persistence
@@ -19,6 +21,15 @@ namespace query.persistence
             var collection = _database.GetCollection<T>(typeof(T).Name);
 
             await collection.InsertOneAsync(model);
+        }
+
+        public async Task<IEnumerable<T>> GetAll<T>() where T : class
+        {
+            var collection = _database.GetCollection<T>(typeof(T).Name);
+
+            var results = await collection.FindAsync(FilterDefinition<T>.Empty);
+
+            return await results.ToListAsync();
         }
     }
 }

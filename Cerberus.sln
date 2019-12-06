@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "query.persistence", "src\qu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "messages", "src\messages\messages.csproj", "{2BA41AB7-FE5A-4F36-B794-2CF98581882A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "query.models", "src\query.models\query.models.csproj", "{533D7C17-AAD6-4B5A-AA75-D14DEAA0C0C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{2BA41AB7-FE5A-4F36-B794-2CF98581882A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BA41AB7-FE5A-4F36-B794-2CF98581882A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BA41AB7-FE5A-4F36-B794-2CF98581882A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{533D7C17-AAD6-4B5A-AA75-D14DEAA0C0C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{533D7C17-AAD6-4B5A-AA75-D14DEAA0C0C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{533D7C17-AAD6-4B5A-AA75-D14DEAA0C0C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{533D7C17-AAD6-4B5A-AA75-D14DEAA0C0C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,7 +62,7 @@ Global
 		{1D710A97-23B2-43C7-9D25-B27F5D447FD7} = {5E3F5BED-06E0-4BCB-AF8C-503B1B151057}
 		{995BE1FE-17DC-4231-BB96-F4D36302A249} = {5E3F5BED-06E0-4BCB-AF8C-503B1B151057}
 		{9741E284-5AF6-4232-BDC6-2DAA51AC6CCF} = {5E3F5BED-06E0-4BCB-AF8C-503B1B151057}
-		{2BA41AB7-FE5A-4F36-B794-2CF98581882A} = {5E3F5BED-06E0-4BCB-AF8C-503B1B151057}
+		{533D7C17-AAD6-4B5A-AA75-D14DEAA0C0C3} = {5E3F5BED-06E0-4BCB-AF8C-503B1B151057}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE895848-907C-494C-B556-BDAA9F153459}

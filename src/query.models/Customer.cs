@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace query.persistence.Models
+namespace query.models
 {
     public class Customer
     {

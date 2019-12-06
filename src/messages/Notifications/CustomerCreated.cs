@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace command.Notifications
+namespace messages.Notifications
 {
     public class CustomerCreated : INotification
     {

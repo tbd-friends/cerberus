@@ -1,8 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using api.Input.Models;
-using command.Requests;
 using MediatR;
+using messages.Requests;
 using Microsoft.AspNetCore.Mvc;
+using query.models;
 
 namespace api.Controllers
 {
@@ -25,6 +28,12 @@ namespace api.Controllers
                 await _mediator.Send(new CreateNewCustomer
                 { Honorific = model.Honorific, FirstName = model.FirstName, LastName = model.LastName });
             }
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<Customer>> CustomerList()
+        {
+            return await _mediator.Send(new GetAllCustomers());
         }
     }
 }

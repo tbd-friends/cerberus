@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace command.Requests
+namespace messages.Requests
 {
     public class CreateNewCustomer : IRequest
     {

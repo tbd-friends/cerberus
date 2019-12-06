@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\messages\messages.csproj" />
+    <ProjectReference Include="..\query.models\query.models.csproj" />
     <ProjectReference Include="..\query.persistence\query.persistence.csproj" />
   </ItemGroup>
 

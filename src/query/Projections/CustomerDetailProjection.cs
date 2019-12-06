@@ -1,11 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using command.Notifications;
 using MediatR;
+using messages.Notifications;
+using query.models;
 using query.persistence;
-using query.persistence.Models;
 
-namespace query.Handlers
+namespace query.Projections
 {
     public class CustomerDetailProjection : INotificationHandler<CustomerCreated>
     {

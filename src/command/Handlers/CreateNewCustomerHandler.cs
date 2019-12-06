@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using command.Notifications;
 using command.persistence.Context;
 using command.persistence.Models;
-using command.Requests;
 using MediatR;
+using messages.Notifications;
+using messages.Requests;
 
 namespace command.Handlers
 {
