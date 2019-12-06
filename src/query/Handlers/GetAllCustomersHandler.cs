@@ -6,6 +6,7 @@ using MediatR;
 using messages.Requests;
 using query.models;
 using query.persistence;
+using query.Requests;
 
 namespace query.Handlers
 {

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using api.Input.Models;
@@ -6,6 +6,7 @@ using MediatR;
 using messages.Requests;
 using Microsoft.AspNetCore.Mvc;
 using query.models;
+using query.Requests;
 
 namespace api.Controllers
 {
@@ -34,6 +35,21 @@ namespace api.Controllers
         public async Task<IEnumerable<Customer>> CustomerList()
         {
             return await _mediator.Send(new GetAllCustomers());
+        }
+
+        [HttpPut, Route("{id:guid}")]
+        public async Task UpdateCustomer(Guid id, CustomerInputModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _mediator.Send(new UpdateCustomer()
+                {
+                    Id = id,
+                    Honorific = model.Honorific,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName
+                });
+            }
         }
     }
 }

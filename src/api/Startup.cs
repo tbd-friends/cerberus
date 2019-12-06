@@ -28,7 +28,9 @@ namespace api
             services.AddControllers();
 
             services.AddDbContext<ApplicationContext>(ctx =>
-                ctx.UseSqlServer(Configuration.GetConnectionString("cerberus-command")));
+            {
+                ctx.UseSqlServer(Configuration.GetConnectionString("cerberus-command"));
+            });
 
             services.AddTransient<ApplicationQueryContext>();
 

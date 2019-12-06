@@ -1,7 +1,9 @@
 ﻿using System;
-namespace query.models
+using MediatR;
+
+namespace messages.Requests
 {
-    public class Customer
+    public class UpdateCustomer : IRequest
     {
         public Guid Id { get; set; }
         public string Honorific { get; set; }

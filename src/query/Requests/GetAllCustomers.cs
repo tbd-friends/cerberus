@@ -1,7 +1,11 @@
-﻿namespace query.Requests
+﻿using System.Collections.Generic;
+using MediatR;
+using query.models;
+
+namespace query.Requests
 {
-    public class GetAllCustomers
+    public class GetAllCustomers : IRequest<IEnumerable<Customer>>
     {
-        
+
     }
 }

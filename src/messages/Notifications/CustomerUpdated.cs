@@ -1,7 +1,9 @@
 ﻿using System;
-namespace query.models
+using MediatR;
+
+namespace messages.Notifications
 {
-    public class Customer
+    public class CustomerUpdated : INotification
     {
         public Guid Id { get; set; }
         public string Honorific { get; set; }
