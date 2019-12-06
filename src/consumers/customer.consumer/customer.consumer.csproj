@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\core\cerberus.core.kafka\cerberus.core.kafka.csproj" />
     <ProjectReference Include="..\..\query.persistence\query.persistence.csproj" />
   </ItemGroup>
 

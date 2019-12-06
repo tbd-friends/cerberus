@@ -38,7 +38,14 @@ namespace query.persistence
         {
             var collection = _database.GetCollection<T>(typeof(T).Name);
 
-            await collection.ReplaceOneAsync(filter, model);
+            if (await collection.Find(filter).AnyAsync())
+            {
+                await collection.ReplaceOneAsync(filter, model);
+            }
+            else
+            {
+                await Insert(model);
+            }
         }
     }
 }

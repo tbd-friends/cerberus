@@ -1,25 +1,24 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using command.persistence.Context;
+using command.persistence.Models;
 using MediatR;
-using messages.Notifications;
 using messages.Requests;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace command.Handlers
 {
-    public class UpdateCustomerHandler : IRequestHandler<UpdateCustomer>
+    public class UpdateCustomerHandler : PublishingRequestHandler<UpdateCustomer, Customer>
     {
         private readonly ApplicationContext _context;
-        private readonly IMediator _mediator;
 
-        public UpdateCustomerHandler(ApplicationContext context, IMediator mediator)
+        public UpdateCustomerHandler(ApplicationContext context, IConfiguration configuration) : base("customers", configuration)
         {
             _context = context;
-            _mediator = mediator;
         }
 
-        public async Task<Unit> Handle(UpdateCustomer request, CancellationToken cancellationToken)
+        public override async Task<Unit> Handle(UpdateCustomer request, CancellationToken cancellationToken)
         {
             var customer = await _context.Customers.SingleAsync(f => f.Id == request.Id, cancellationToken);
 
@@ -29,13 +28,7 @@ namespace command.Handlers
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            await _mediator.Publish(new CustomerUpdated
-            {
-                Id = request.Id,
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Honorific = request.Honorific
-            }, cancellationToken);
+            await Publish(customer);
 
             return Unit.Value;
         }

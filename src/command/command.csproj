@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\command.persistence\command.persistence.csproj" />
+    <ProjectReference Include="..\core\cerberus.core.kafka\cerberus.core.kafka.csproj" />
     <ProjectReference Include="..\messages\messages.csproj" />
   </ItemGroup>
 

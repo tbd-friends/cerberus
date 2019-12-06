@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using cerberus.core.kafka;
 using Confluent.Kafka;
 using customer.consumer.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
 
 namespace customer.consumer
 {
@@ -43,7 +42,7 @@ namespace customer.consumer
                     {
                         var context = _getContext();
 
-                        await context.Insert(message.Value);
+                        await context.Update(f => f.Id == message.Value.Id, message.Value);
 
                         _consumer.Commit(message);
                     }
@@ -53,14 +52,6 @@ namespace customer.consumer
                     }
                 }
             }
-        }
-    }
-
-    public class KafkaJsonValueDeserializer<T> : IDeserializer<T>
-    {
-        public T Deserialize(ReadOnlySpan<byte> data, bool isNull, SerializationContext context)
-        {
-            return JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(data));
         }
     }
 }
