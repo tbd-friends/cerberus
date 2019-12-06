@@ -3,21 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api", "src\api\api.csproj", "{5D525847-4408-41A8-AEE7-34E69A23209C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api", "src\api\api.csproj", "{5D525847-4408-41A8-AEE7-34E69A23209C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{5E3F5BED-06E0-4BCB-AF8C-503B1B151057}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "command", "src\command\command.csproj", "{F4FD83E7-F58E-41FD-B90C-F804CDBA272C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "command", "src\command\command.csproj", "{F4FD83E7-F58E-41FD-B90C-F804CDBA272C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "command.persistence", "src\command.persistence\command.persistence.csproj", "{1D710A97-23B2-43C7-9D25-B27F5D447FD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "command.persistence", "src\command.persistence\command.persistence.csproj", "{1D710A97-23B2-43C7-9D25-B27F5D447FD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "query", "src\query\query.csproj", "{995BE1FE-17DC-4231-BB96-F4D36302A249}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "query", "src\query\query.csproj", "{995BE1FE-17DC-4231-BB96-F4D36302A249}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "query.persistence", "src\query.persistence\query.persistence.csproj", "{9741E284-5AF6-4232-BDC6-2DAA51AC6CCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "query.persistence", "src\query.persistence\query.persistence.csproj", "{9741E284-5AF6-4232-BDC6-2DAA51AC6CCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "messages", "src\messages\messages.csproj", "{2BA41AB7-FE5A-4F36-B794-2CF98581882A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "messages", "src\messages\messages.csproj", "{2BA41AB7-FE5A-4F36-B794-2CF98581882A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "query.models", "src\query.models\query.models.csproj", "{533D7C17-AAD6-4B5A-AA75-D14DEAA0C0C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "query.models", "src\query.models\query.models.csproj", "{533D7C17-AAD6-4B5A-AA75-D14DEAA0C0C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consumers", "Consumers", "{D5E76D46-939B-4098-B98E-9619762244DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "customer.consumer", "src\consumers\customer.consumer\customer.consumer.csproj", "{361EBE89-4A08-4C49-9917-E3048E74362D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,10 @@ Global
 		{533D7C17-AAD6-4B5A-AA75-D14DEAA0C0C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{533D7C17-AAD6-4B5A-AA75-D14DEAA0C0C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{533D7C17-AAD6-4B5A-AA75-D14DEAA0C0C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{361EBE89-4A08-4C49-9917-E3048E74362D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{361EBE89-4A08-4C49-9917-E3048E74362D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{361EBE89-4A08-4C49-9917-E3048E74362D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{361EBE89-4A08-4C49-9917-E3048E74362D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +71,8 @@ Global
 		{995BE1FE-17DC-4231-BB96-F4D36302A249} = {5E3F5BED-06E0-4BCB-AF8C-503B1B151057}
 		{9741E284-5AF6-4232-BDC6-2DAA51AC6CCF} = {5E3F5BED-06E0-4BCB-AF8C-503B1B151057}
 		{533D7C17-AAD6-4B5A-AA75-D14DEAA0C0C3} = {5E3F5BED-06E0-4BCB-AF8C-503B1B151057}
+		{D5E76D46-939B-4098-B98E-9619762244DF} = {5E3F5BED-06E0-4BCB-AF8C-503B1B151057}
+		{361EBE89-4A08-4C49-9917-E3048E74362D} = {D5E76D46-939B-4098-B98E-9619762244DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE895848-907C-494C-B556-BDAA9F153459}
