@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\command.persistence\command.persistence.csproj" />
     <ProjectReference Include="..\messages\messages.csproj" />
+    <ProjectReference Include="..\query.persistence\query.persistence.csproj" />
   </ItemGroup>
 
 </Project>

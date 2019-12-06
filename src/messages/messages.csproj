@@ -8,9 +8,4 @@
     <PackageReference Include="MediatR" Version="7.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\command.persistence\command.persistence.csproj" />
-    <ProjectReference Include="..\messages\messages.csproj" />
-  </ItemGroup>
-
 </Project>

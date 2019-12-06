@@ -17,6 +17,8 @@
   <ItemGroup>
     <ProjectReference Include="..\command.persistence\command.persistence.csproj" />
     <ProjectReference Include="..\command\command.csproj" />
+    <ProjectReference Include="..\query.persistence\query.persistence.csproj" />
+    <ProjectReference Include="..\query\query.csproj" />
   </ItemGroup>
 
 </Project>
