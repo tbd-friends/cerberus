@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\core\cerberus.core.kafka\cerberus.core.kafka.csproj" />
+    <ProjectReference Include="..\consumer.models\consumer.models.csproj" />
     <ProjectReference Include="..\consumer.persistence\consumer.persistence.csproj" />
   </ItemGroup>
 

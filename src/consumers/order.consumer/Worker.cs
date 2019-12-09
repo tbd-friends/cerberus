@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using cerberus.core.kafka;
@@ -42,17 +43,29 @@ namespace order.consumer
             var context = _getStorage();
 
             var entry = await context.Get<CustomerWithOrders>(f => f.Id == order.CustomerId) ??
-                        new CustomerWithOrders() { Id = order.CustomerId, Orders = new List<Order>() };
+                        (!order.IsDeleted
+                            ? new CustomerWithOrders() { Id = order.CustomerId, Orders = new List<Order>() }
+                            : null);
 
-            entry.Orders.Add(new Order
+            if (entry != null)
             {
-                OrderId = order.Id,
-                ItemId = order.ItemId,
-                ItemName = order.ItemName,
-                Quantity = order.Quantity
-            });
+                if (!order.IsDeleted)
+                {
+                    entry.Orders.Add(new Order
+                    {
+                        OrderId = order.Id,
+                        ItemId = order.ItemId,
+                        ItemName = order.ItemName,
+                        Quantity = order.Quantity
+                    });
+                }
+                else
+                {
+                    entry.Orders.Remove(entry.Orders.Single(o => o.OrderId == order.Id));
+                }
 
-            await context.Update(f => f.Id == order.CustomerId, entry);
+                await context.Update(f => f.Id == order.CustomerId, entry);
+            }
 
             return true;
         }
@@ -61,14 +74,21 @@ namespace order.consumer
         {
             var context = _getStorage();
 
-            var entry = await context.Get<CustomerWithOrders>(f => f.Id == customer.Id) ??
-                        new CustomerWithOrders() { Id = customer.Id, Orders = new List<Order>() };
+            if (!customer.IsDeleted)
+            {
+                var entry = await context.Get<CustomerWithOrders>(f => f.Id == customer.Id) ??
+                            new CustomerWithOrders() { Id = customer.Id, Orders = new List<Order>() };
 
-            entry.FirstName = customer.FirstName;
-            entry.LastName = customer.LastName;
-            entry.Honorific = customer.Honorific;
+                entry.FirstName = customer.FirstName;
+                entry.LastName = customer.LastName;
+                entry.Honorific = customer.Honorific;
 
-            await context.Update(f => f.Id == customer.Id, entry);
+                await context.Update(f => f.Id == customer.Id, entry);
+            }
+            else
+            {
+                await context.Delete<CustomerWithOrders>(f => f.Id == customer.Id);
+            }
 
             return true;
         }

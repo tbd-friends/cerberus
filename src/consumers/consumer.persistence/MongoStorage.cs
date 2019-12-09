@@ -54,5 +54,12 @@ namespace consumer.persistence
                 await Insert(model);
             }
         }
+
+        public async Task Delete<T>(Expression<Func<T, bool>> filter)
+        {
+            var collection = _database.GetCollection<T>(typeof(T).Name);
+
+            await collection.DeleteOneAsync(filter);
+        }
     }
 }

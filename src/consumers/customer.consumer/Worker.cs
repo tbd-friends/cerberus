@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using cerberus.core.kafka;
-using consumer.persistence;
-using customer.consumer.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using order.consumer.ConsumerModels;
 
 namespace customer.consumer
 {
@@ -15,7 +14,7 @@ namespace customer.consumer
     {
         private readonly ILogger<Worker> _logger;
         private readonly GetStorage _getStorage;
-        private readonly IDictionary<string, string> _kafkaConfiguration;// = new Dictionary<string, string>();
+        private readonly IDictionary<string, string> _kafkaConfiguration = new Dictionary<string, string>();
 
         public Worker(ILogger<Worker> logger, IConfiguration configuration, GetStorage getStorage)
         {
@@ -47,14 +46,22 @@ namespace customer.consumer
         {
             var context = _getStorage();
 
-            var entry = await context.Get<Customer>(f => f.Id == customer.Id) ??
-                        new Customer() { Id = customer.Id };
+            var entry = await context.Get<Customer>(f => f.Id == customer.Id);
 
-            entry.FirstName = customer.FirstName;
-            entry.LastName = customer.LastName;
-            entry.Honorific = customer.Honorific;
+            if (entry != null && customer.IsDeleted)
+            {
+                await context.Delete<Customer>(f => f.Id == customer.Id);
+            }
+            else
+            {
+                entry = entry ?? new Customer() { Id = customer.Id };
 
-            await context.Update(f => f.Id == customer.Id, entry);
+                entry.FirstName = customer.FirstName;
+                entry.LastName = customer.LastName;
+                entry.Honorific = customer.Honorific;
+
+                await context.Update(f => f.Id == customer.Id, entry);
+            }
 
             return true;
         }
