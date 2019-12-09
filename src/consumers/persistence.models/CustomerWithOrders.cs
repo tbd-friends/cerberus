@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace order.consumer.PersistenceModels
+namespace persistence.models
 {
     public class CustomerWithOrders
     {

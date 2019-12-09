@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using cerberus.core.kafka;
-using consumer.models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using persistence.models;
+using CustomerMessage = consumer.models.Customer;
+using AddressMessage = consumer.models.CustomerAddress;
 
 namespace customer.consumer
 {
@@ -30,8 +32,10 @@ namespace customer.consumer
             {
                 var topics = new[]
                 {
-                    new TopicConsumer<Customer>("customers", _kafkaConfiguration)
-                        .Start(OnCustomerMessage, stoppingToken)
+                    new TopicConsumer<CustomerMessage>("customers", _kafkaConfiguration)
+                        .Start(OnCustomerMessage, stoppingToken),
+                    new TopicConsumer<AddressMessage>("addresses", _kafkaConfiguration)
+                        .Start(OnAddressMessage, stoppingToken)
                 };
 
                 await Task.WhenAll(topics);
@@ -42,25 +46,49 @@ namespace customer.consumer
             }
         }
 
-        private async Task<bool> OnCustomerMessage(Customer customer)
+        private async Task<bool> OnAddressMessage(AddressMessage address)
         {
-            var context = _getStorage();
+            var storage = _getStorage();
 
-            var entry = await context.Get<Customer>(f => f.Id == customer.Id);
+            var entry = await storage.Get<Customer>(f => f.Id == address.CustomerId) ??
+                        Customer.Default(address.CustomerId);
+
+            entry.Addresses = entry.Addresses ?? new List<Address>();
+
+            entry.Addresses.Add(new Address
+            {
+                AddressLine1 = address.AddressLine1,
+                AddressLine2 = address.AddressLine2,
+                AddressLine3 = address.AddressLine3,
+                City = address.City,
+                State = address.State,
+                PostalCode = address.PostalCode
+            });
+
+            await storage.Update(f => f.Id == address.CustomerId, entry);
+
+            return true;
+        }
+
+        private async Task<bool> OnCustomerMessage(CustomerMessage customer)
+        {
+            var storage = _getStorage();
+
+            var entry = await storage.Get<Customer>(f => f.Id == customer.Id);
 
             if (entry != null && customer.IsDeleted)
             {
-                await context.Delete<Customer>(f => f.Id == customer.Id);
+                await storage.Delete<Customer>(f => f.Id == customer.Id);
             }
             else
             {
-                entry = entry ?? new Customer() { Id = customer.Id };
+                entry = entry ?? Customer.Default(customer.Id);
 
                 entry.FirstName = customer.FirstName;
                 entry.LastName = customer.LastName;
                 entry.Honorific = customer.Honorific;
 
-                await context.Update(f => f.Id == customer.Id, entry);
+                await storage.Update(f => f.Id == customer.Id, entry);
             }
 
             return true;

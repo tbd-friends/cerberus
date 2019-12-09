@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using cerberus.core.kafka;
-using command.persistence.Models;
 using Confluent.Kafka;
 using MediatR;
 using Microsoft.Extensions.Configuration;

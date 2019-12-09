@@ -63,5 +63,20 @@ namespace api.Controllers
         {
             return await _mediator.Send(new GetCustomerWithOrders { Id = id });
         }
+
+        [HttpPost, Route("{id:guid}/delivery-address")]
+        public async Task AddDeliveryAddress(Guid id, AddressInputModel model)
+        {
+            await _mediator.Send(new AddDeliveryAddress()
+            {
+                CustomerId = id,
+                AddressLine1 = model.AddressLine1,
+                AddressLine2 = model.AddressLine2,
+                AddressLine3 = model.AddressLine3,
+                City = model.City,
+                State = model.State,
+                PostalCode = model.PostalCode
+            });
+        }
     }
 }

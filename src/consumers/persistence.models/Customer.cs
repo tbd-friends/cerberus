@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace consumer.models
+namespace persistence.models
 {
     public class Customer
     {
@@ -10,8 +10,8 @@ namespace consumer.models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public bool IsDeleted => string.IsNullOrEmpty(FirstName) &&
-                                 string.IsNullOrEmpty(LastName) &&
-                                 string.IsNullOrEmpty(Honorific);
+        public ICollection<Address> Addresses { get; set; }
+
+        public static Customer Default(Guid id) => new Customer { Id = id, Addresses = new List<Address>() };
     }
 }

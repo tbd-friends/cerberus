@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "consumer.persistence", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "consumer.models", "src\consumers\consumer.models\consumer.models.csproj", "{F60F91DB-C571-409A-B664-ABD86B37E195}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "persistence.models", "src\consumers\persistence.models\persistence.models.csproj", "{697D78DB-4ACC-4BED-AD0B-F8D89350A608}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{F60F91DB-C571-409A-B664-ABD86B37E195}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F60F91DB-C571-409A-B664-ABD86B37E195}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F60F91DB-C571-409A-B664-ABD86B37E195}.Release|Any CPU.Build.0 = Release|Any CPU
+		{697D78DB-4ACC-4BED-AD0B-F8D89350A608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{697D78DB-4ACC-4BED-AD0B-F8D89350A608}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{697D78DB-4ACC-4BED-AD0B-F8D89350A608}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{697D78DB-4ACC-4BED-AD0B-F8D89350A608}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +108,7 @@ Global
 		{FFBF5E1A-B9DA-404A-BE9D-7D041E0CC6B4} = {D5E76D46-939B-4098-B98E-9619762244DF}
 		{D253736F-9160-4F79-A686-902C65EC987B} = {D5E76D46-939B-4098-B98E-9619762244DF}
 		{F60F91DB-C571-409A-B664-ABD86B37E195} = {D5E76D46-939B-4098-B98E-9619762244DF}
+		{697D78DB-4ACC-4BED-AD0B-F8D89350A608} = {D5E76D46-939B-4098-B98E-9619762244DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE895848-907C-494C-B556-BDAA9F153459}

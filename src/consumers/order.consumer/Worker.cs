@@ -3,11 +3,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using cerberus.core.kafka;
-using consumer.models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using order.consumer.PersistenceModels;
+using persistence.models;
+using CustomerOrderMessage = consumer.models.CustomerOrder;
+using CustomerMessage = consumer.models.Customer;
 
 namespace order.consumer
 {
@@ -29,16 +30,16 @@ namespace order.consumer
         {
             var topics = new[]
             {
-                new TopicConsumer<Customer>("customers", _kafkaConfiguration)
+                new TopicConsumer<CustomerMessage>("customers", _kafkaConfiguration)
                     .Start(OnCustomerMessage, stoppingToken),
-                new TopicConsumer<CustomerOrder>("orders", _kafkaConfiguration)
+                new TopicConsumer<CustomerOrderMessage>("orders", _kafkaConfiguration)
                     .Start(OnOrderMessage, stoppingToken)
             };
 
             await Task.WhenAll(topics);
         }
 
-        private async Task<bool> OnOrderMessage(CustomerOrder order)
+        private async Task<bool> OnOrderMessage(CustomerOrderMessage order)
         {
             var context = _getStorage();
 
@@ -70,7 +71,7 @@ namespace order.consumer
             return true;
         }
 
-        private async Task<bool> OnCustomerMessage(Customer customer)
+        private async Task<bool> OnCustomerMessage(CustomerMessage customer)
         {
             var context = _getStorage();
 
