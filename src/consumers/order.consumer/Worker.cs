@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
 using cerberus.core.kafka;
-using Confluent.Kafka;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -17,13 +13,13 @@ namespace order.consumer
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private readonly GetContext _getContext;
+        private readonly GetStorage _getStorage;
         private readonly IDictionary<string, string> _kafkaConfiguration = new Dictionary<string, string>();
 
-        public Worker(ILogger<Worker> logger, IConfiguration configuration, GetContext getContext)
+        public Worker(ILogger<Worker> logger, IConfiguration configuration, GetStorage getStorage)
         {
             _logger = logger;
-            _getContext = getContext;
+            _getStorage = getStorage;
 
             configuration.Bind("kafka", _kafkaConfiguration);
         }
@@ -36,14 +32,14 @@ namespace order.consumer
                     .Start(OnCustomerMessage, stoppingToken),
                 new TopicConsumer<CustomerOrder>("orders", _kafkaConfiguration)
                     .Start(OnOrderMessage, stoppingToken)
-        };
+            };
 
             await Task.WhenAll(topics);
         }
 
         private async Task<bool> OnOrderMessage(CustomerOrder order)
         {
-            var context = _getContext();
+            var context = _getStorage();
 
             var entry = await context.Get<CustomerWithOrders>(f => f.Id == order.CustomerId) ??
                         new CustomerWithOrders() { Id = order.CustomerId, Orders = new List<Order>() };
@@ -63,7 +59,7 @@ namespace order.consumer
 
         private async Task<bool> OnCustomerMessage(Customer customer)
         {
-            var context = _getContext();
+            var context = _getStorage();
 
             var entry = await context.Get<CustomerWithOrders>(f => f.Id == customer.Id) ??
                         new CustomerWithOrders() { Id = customer.Id, Orders = new List<Order>() };

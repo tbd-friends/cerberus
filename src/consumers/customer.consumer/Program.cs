@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
+using consumer.persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using query.persistence;
+using Microsoft.Extensions.Logging;
 
 namespace customer.consumer
 {
+    public delegate MongoStorage GetStorage();
+
     class Program
     {
         static async Task Main(string[] args)
@@ -17,13 +20,13 @@ namespace customer.consumer
         private static IHostBuilder GetBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
-                .UseWindowsService()
+                .ConfigureLogging((context, builder) => builder.AddConsole())
                 .ConfigureAppConfiguration(context => { context.AddJsonFile("appsettings.json"); })
-                .ConfigureServices(services =>
+                .ConfigureServices((context, services) =>
                 {
-                    services.AddSingleton<GetContext>(() => new ApplicationQueryContext());
+                    services.AddSingleton<GetStorage>(() => new MongoStorage(context.Configuration));
 
-                    services.AddHostedService<WorkerService>();
+                    services.AddHostedService<Worker>();
                 });
         }
     }

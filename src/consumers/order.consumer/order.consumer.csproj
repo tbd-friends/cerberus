@@ -13,6 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\core\cerberus.core.kafka\cerberus.core.kafka.csproj" />
-    <ProjectReference Include="..\..\query.persistence\query.persistence.csproj" />
+    <ProjectReference Include="..\consumer.persistence\consumer.persistence.csproj" />
   </ItemGroup>
 </Project>

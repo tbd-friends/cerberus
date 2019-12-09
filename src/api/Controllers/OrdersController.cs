@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using api.Input;
+using api.Input.Models;
 using MediatR;
 using messages.Requests;
 using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace api.Input
+namespace api.Input.Models
 {
     public class NewCustomerOrderInputModel
     {

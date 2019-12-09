@@ -1,12 +1,13 @@
 using System.Threading.Tasks;
+using consumer.persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using query.persistence;
+using Microsoft.Extensions.Logging;
 
 namespace order.consumer
 {
-    public delegate ApplicationQueryContext GetContext();
+    public delegate MongoStorage GetStorage();
 
     public class Program
     {
@@ -17,10 +18,11 @@ namespace order.consumer
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureLogging((context, builder) => builder.AddConsole())
                 .ConfigureAppConfiguration(context => { context.AddJsonFile("appsettings.json"); })
-                .ConfigureServices((hostContext, services) =>
+                .ConfigureServices((context, services) =>
                 {
-                    services.AddSingleton<GetContext>(() => new ApplicationQueryContext());
+                    services.AddSingleton<GetStorage>(() => new MongoStorage(context.Configuration));
 
                     services.AddHostedService<Worker>();
                 });
