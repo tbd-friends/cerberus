@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace order.consumer.ConsumerModels
+namespace consumer.models
 {
     public class CustomerOrder
     {
