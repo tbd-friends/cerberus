@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using api.Input.Models;
 using MediatR;
 using messages.Requests;
+using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 using query.models;
 using query.Requests;
@@ -32,6 +33,7 @@ namespace api.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         public async Task<IEnumerable<Customer>> CustomerList()
         {
             return await _mediator.Send(new GetAllCustomers());
