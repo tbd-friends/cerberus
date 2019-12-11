@@ -1,5 +1,6 @@
 using command.Handlers;
 using command.persistence.Context;
+using command.persistence.Models;
 using MediatR;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
@@ -13,8 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OData.Edm;
 using query.Handlers;
-using query.models;
 using query.persistence;
+using Customer = query.models.Customer;
 
 namespace api
 {
@@ -41,7 +42,7 @@ namespace api
                 typeof(CreateNewCustomerHandler).Assembly,
                 typeof(GetAllCustomersHandler).Assembly);
 
-            services.AddMvc();
+            services.AddMvc(options => options.EnableEndpointRouting = false);
 
             services.AddOData();
         }
@@ -62,18 +63,30 @@ namespace api
             {
                 routeBuilder.Expand().Select().Filter().Count().OrderBy();
 
-                routeBuilder.MapODataServiceRoute("customers", "bob", EdmModelBuilder.GetCustomersModel());
+                routeBuilder.MapODataServiceRoute("addresses", "odata", EdmModelBuilder.GetAddressesModel());
+                routeBuilder.MapODataServiceRoute("customers", "odata", EdmModelBuilder.GetCustomersModel());
             });
         }
     }
 
     public class EdmModelBuilder
     {
+        public static IEdmModel GetAddressesModel()
+        {
+            var builder = new ODataConventionModelBuilder();
+
+            builder.EntityType<CustomerAddress>().HasKey(k => new { k.CustomerId, k.AddressId });
+
+            builder.EntitySet<CustomerAddress>("Addresses");
+
+            return builder.GetEdmModel();
+        }
+
         public static IEdmModel GetCustomersModel()
         {
             var builder = new ODataConventionModelBuilder();
 
-            builder.EntitySet<Customer>("customers");
+            builder.EntitySet<Customer>("Customers");
 
             return builder.GetEdmModel();
         }
