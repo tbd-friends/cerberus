@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace query.models
 {
     public class Customer
@@ -7,5 +9,6 @@ namespace query.models
         public string Honorific { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public IEnumerable<CustomerAddress> Addresses { get; set; }
     }
 }

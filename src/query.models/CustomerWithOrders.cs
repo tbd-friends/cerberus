@@ -9,10 +9,10 @@ namespace query.models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Honorific { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<CustomerOrder> Orders { get; set; }
     }
 
-    public class Order
+    public class CustomerOrder
     {
         public Guid OrderId { get; set; }
         public Guid ItemId { get; set; }
