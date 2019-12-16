@@ -13,10 +13,7 @@ namespace queryApi.GraphQL
             Field(f => f.Honorific, true);
             Field(f => f.Id, nullable: false);
             Field<ListGraphType<AddressType>>("addresses", resolve: context => context.Source.Addresses);
-            Field<ListGraphType<CustomerOrderType>>("orders",
-                resolve: context => query.Get<CustomerWithOrders>(c => c.Id == context.Source.Id)
-                    .GetAwaiter()
-                    .GetResult().Orders);
+            Field<ListGraphType<CustomerOrderType>>("orders", resolve: context => context.Source.Orders);
         }
     }
 }

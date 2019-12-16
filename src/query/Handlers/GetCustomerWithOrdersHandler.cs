@@ -7,7 +7,7 @@ using query.Requests;
 
 namespace query.Handlers
 {
-    public class GetCustomerWithOrdersHandler : IRequestHandler<GetCustomerWithOrders, CustomerWithOrders>
+    public class GetCustomerWithOrdersHandler : IRequestHandler<GetCustomerWithOrders, Customer>
     {
         private readonly ApplicationQueryContext _context;
 
@@ -16,9 +16,9 @@ namespace query.Handlers
             _context = context;
         }
 
-        public async Task<CustomerWithOrders> Handle(GetCustomerWithOrders request, CancellationToken cancellationToken)
+        public async Task<Customer> Handle(GetCustomerWithOrders request, CancellationToken cancellationToken)
         {
-            return await _context.Get<CustomerWithOrders>(f => f.Id == request.Id);
+            return await _context.Get<Customer>(f => f.Id == request.Id);
         }
     }
 }

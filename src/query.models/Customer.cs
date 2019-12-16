@@ -9,6 +9,7 @@ namespace query.models
         public string Honorific { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public IEnumerable<CustomerOrder> Orders { get; set; }
         public IEnumerable<CustomerAddress> Addresses { get; set; }
     }
 }

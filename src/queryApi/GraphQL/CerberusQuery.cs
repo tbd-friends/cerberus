@@ -17,7 +17,8 @@ namespace queryApi.GraphQL
                     {
                         return new[]
                         {
-                            query.Get<Customer>(c => c.Id == context.GetArgument("id", Guid.Empty))
+                            query.Get<Customer>(c => c.Id == context.GetArgument("id", Guid.Empty)).GetAwaiter()
+                                .GetResult()
                         };
                     }
 

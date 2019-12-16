@@ -59,9 +59,9 @@ namespace api.Controllers
         }
 
         [HttpGet, Route("{id:guid}/orders")]
-        public async Task<CustomerWithOrders> GetCustomerWithOrders(Guid id)
+        public async Task<IEnumerable<CustomerOrder>> GetCustomerWithOrders(Guid id)
         {
-            return await _mediator.Send(new GetCustomerWithOrders { Id = id });
+            return (await _mediator.Send(new GetCustomerWithOrders { Id = id })).Orders;
         }
 
         [HttpPost, Route("{id:guid}/delivery-address")]

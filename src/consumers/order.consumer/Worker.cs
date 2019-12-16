@@ -28,15 +28,15 @@ namespace order.consumer
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var topics = new[]
-            {
-                new TopicConsumer<CustomerMessage>("customers", _kafkaConfiguration)
-                    .Start(OnCustomerMessage, stoppingToken),
-                new TopicConsumer<CustomerOrderMessage>("orders", _kafkaConfiguration)
-                    .Start(OnOrderMessage, stoppingToken)
-            };
+            //var topics = new[]
+            //{
+            //    new TopicConsumer<CustomerMessage>("customers", _kafkaConfiguration)
+            //        .Start(OnCustomerMessage, stoppingToken),
+            //    new TopicConsumer<CustomerOrderMessage>("orders", _kafkaConfiguration)
+            //        .Start(OnOrderMessage, stoppingToken)
+            //};
 
-            await Task.WhenAll(topics);
+            //await Task.WhenAll(topics);
         }
 
         private async Task<bool> OnOrderMessage(CustomerOrderMessage order)

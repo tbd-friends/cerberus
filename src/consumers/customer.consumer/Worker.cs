@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using cerberus.core.kafka;
@@ -9,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using persistence.models;
 using CustomerMessage = consumer.models.Customer;
 using AddressMessage = consumer.models.CustomerAddress;
+using Customer = persistence.models.Customer;
+using CustomerOrderMessage = consumer.models.CustomerOrder;
 
 namespace customer.consumer
 {
@@ -35,7 +38,9 @@ namespace customer.consumer
                     new TopicConsumer<CustomerMessage>("customers", _kafkaConfiguration)
                         .Start(OnCustomerMessage, stoppingToken),
                     new TopicConsumer<AddressMessage>("addresses", _kafkaConfiguration)
-                        .Start(OnAddressMessage, stoppingToken)
+                        .Start(OnAddressMessage, stoppingToken),
+                    new TopicConsumer<CustomerOrderMessage>("orders", _kafkaConfiguration)
+                        .Start(OnOrderMessage, stoppingToken)
                 };
 
                 await Task.WhenAll(topics);
@@ -44,6 +49,38 @@ namespace customer.consumer
             {
                 _logger.LogCritical($"Topics could not be subscribed {exception}");
             }
+        }
+
+        private async Task<bool> OnOrderMessage(CustomerOrderMessage order)
+        {
+            var context = _getStorage();
+
+            var entry = await context.Get<Customer>(f => f.Id == order.CustomerId) ??
+                        (!order.IsDeleted
+                            ? Customer.Default(order.CustomerId)
+                            : null);
+
+            if (entry != null)
+            {
+                if (!order.IsDeleted)
+                {
+                    entry.Orders.Add(new Order
+                    {
+                        OrderId = order.Id,
+                        ItemId = order.ItemId,
+                        ItemName = order.ItemName,
+                        Quantity = order.Quantity
+                    });
+                }
+                else
+                {
+                    entry.Orders.Remove(entry.Orders.Single(o => o.OrderId == order.Id));
+                }
+
+                await context.Update(f => f.Id == order.CustomerId, entry);
+            }
+
+            return true;
         }
 
         private async Task<bool> OnAddressMessage(AddressMessage address)

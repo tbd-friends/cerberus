@@ -11,7 +11,9 @@ namespace persistence.models
         public string LastName { get; set; }
 
         public ICollection<Address> Addresses { get; set; }
+        public ICollection<Order> Orders { get; set; }
 
-        public static Customer Default(Guid id) => new Customer { Id = id, Addresses = new List<Address>() };
+        public static Customer Default(Guid id) => new Customer
+        { Id = id, Addresses = new List<Address>(), Orders = new List<Order>() };
     }
 }
