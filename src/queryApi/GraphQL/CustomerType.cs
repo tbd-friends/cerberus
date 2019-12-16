@@ -1,13 +1,12 @@
 ﻿using GraphQL.Types;
-using MediatR;
 using query.models;
-using query.Requests;
+using query.persistence;
 
-namespace api.GraphQL
+namespace queryApi.GraphQL
 {
     public sealed class CustomerType : ObjectGraphType<Customer>
     {
-        public CustomerType(IMediator mediator)
+        public CustomerType(ApplicationQueryContext query)
         {
             Field(f => f.FirstName, false);
             Field(f => f.LastName, false);
@@ -15,7 +14,8 @@ namespace api.GraphQL
             Field(f => f.Id, nullable: false);
             Field<ListGraphType<AddressType>>("addresses", resolve: context => context.Source.Addresses);
             Field<ListGraphType<CustomerOrderType>>("orders",
-                resolve: context => mediator.Send(new GetCustomerWithOrders {Id = context.Source.Id}).GetAwaiter()
+                resolve: context => query.Get<CustomerWithOrders>(c => c.Id == context.Source.Id)
+                    .GetAwaiter()
                     .GetResult().Orders);
         }
     }

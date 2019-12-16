@@ -1,15 +1,13 @@
 ﻿using System;
-using command.persistence.Context;
 using GraphQL.Types;
-using MediatR;
 using query.models;
-using query.Requests;
+using query.persistence;
 
-namespace api.GraphQL
+namespace queryApi.GraphQL
 {
     public class CerberusQuery : ObjectGraphType
     {
-        public CerberusQuery(IMediator mediator)
+        public CerberusQuery(ApplicationQueryContext query)
         {
             Field<ListGraphType<CustomerType>>(
                 "customers",
@@ -19,12 +17,11 @@ namespace api.GraphQL
                     {
                         return new[]
                         {
-                            mediator.Send(new GetCustomerById {Id = (Guid) context.Arguments["id"]}).GetAwaiter()
-                                .GetResult()
+                            query.Get<Customer>(c => c.Id == context.GetArgument("id", Guid.Empty))
                         };
                     }
 
-                    return mediator.Send(new GetAllCustomers()).GetAwaiter().GetResult();
+                    return query.GetAll<Customer>();
                 },
                 arguments: new QueryArguments(
                     new QueryArgument<GuidGraphType>() { Name = "id", DefaultValue = null }));

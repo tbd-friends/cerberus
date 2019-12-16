@@ -1,7 +1,7 @@
 ﻿using GraphQL.Types;
 using query.models;
 
-namespace api.GraphQL
+namespace queryApi.GraphQL
 {
     public sealed class CustomerOrderType : ObjectGraphType<CustomerOrder>
     {

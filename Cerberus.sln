@@ -29,11 +29,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cerberus.core.kafka", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "order.consumer", "src\consumers\order.consumer\order.consumer.csproj", "{FFBF5E1A-B9DA-404A-BE9D-7D041E0CC6B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "consumer.persistence", "src\consumers\consumer.persistence\consumer.persistence.csproj", "{D253736F-9160-4F79-A686-902C65EC987B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "consumer.persistence", "src\consumers\consumer.persistence\consumer.persistence.csproj", "{D253736F-9160-4F79-A686-902C65EC987B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "consumer.models", "src\consumers\consumer.models\consumer.models.csproj", "{F60F91DB-C571-409A-B664-ABD86B37E195}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "consumer.models", "src\consumers\consumer.models\consumer.models.csproj", "{F60F91DB-C571-409A-B664-ABD86B37E195}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "persistence.models", "src\consumers\persistence.models\persistence.models.csproj", "{697D78DB-4ACC-4BED-AD0B-F8D89350A608}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "persistence.models", "src\consumers\persistence.models\persistence.models.csproj", "{697D78DB-4ACC-4BED-AD0B-F8D89350A608}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "queryApi", "src\queryApi\queryApi.csproj", "{C7F1CA78-13F9-4EB4-95F1-EDA25A9BAE21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{697D78DB-4ACC-4BED-AD0B-F8D89350A608}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{697D78DB-4ACC-4BED-AD0B-F8D89350A608}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{697D78DB-4ACC-4BED-AD0B-F8D89350A608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7F1CA78-13F9-4EB4-95F1-EDA25A9BAE21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7F1CA78-13F9-4EB4-95F1-EDA25A9BAE21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7F1CA78-13F9-4EB4-95F1-EDA25A9BAE21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7F1CA78-13F9-4EB4-95F1-EDA25A9BAE21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

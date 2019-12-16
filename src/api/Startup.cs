@@ -1,9 +1,5 @@
-using api.GraphQL;
 using command.Handlers;
 using command.persistence.Context;
-using GraphQL.Server;
-using GraphQL.Server.Transports.AspNetCore;
-using GraphQL.Types;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,9 +25,6 @@ namespace api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<KestrelServerOptions>(options => { options.AllowSynchronousIO = true; });
-            services.Configure<IISServerOptions>(options => { options.AllowSynchronousIO = true; });
-
             services.AddControllers();
 
             services.AddDbContext<ApplicationContext>(ctx =>
@@ -45,18 +38,6 @@ namespace api
                 typeof(CreateNewCustomerHandler).Assembly,
                 typeof(GetAllCustomersHandler).Assembly);
 
-            services.AddTransient<CustomerType>();
-            services.AddTransient<AddressType>();
-            services.AddTransient<CustomerOrderType>();
-            services.AddTransient<CerberusQuery>();
-            services.AddSingleton<ISchema, CerberusSchema>();
-            services.AddHttpContextAccessor();
-
-            services.AddGraphQL(options =>
-            {
-                options.EnableMetrics = true;
-                options.ExposeExceptions = true;
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,10 +53,6 @@ namespace api
             app.UseRouting();
 
             app.UseAuthorization();
-
-            app.UseGraphQL<ISchema>();
-
-            app.UseGraphQLPlayground();
 
             app.UseEndpoints(endpoints =>
             {

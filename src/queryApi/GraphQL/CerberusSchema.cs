@@ -2,7 +2,7 @@
 using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace api.GraphQL
+namespace queryApi.GraphQL
 {
     public class CerberusSchema : Schema
     {
